@@ -2,7 +2,7 @@ require("dotenv").config();
 
 const taskRoutes = require("./src/routes/taskRoutes");
 const authRoutes = require("./src/routes/authRoutes");
-
+const errorMiddleware = require("./src/middleware/errorMiddleware");
 const express = require("express");
 
 const connectDatabase = require("./src/config/database");
@@ -20,7 +20,7 @@ app.get("/", (req, res) => {
        message: "Task Management System API is running - TEST"
     });
 });
-
+app.use(errorMiddleware);
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {

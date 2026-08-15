@@ -6,21 +6,16 @@ const createTask = async (req, res) => {
 
         res.status(201).json(task);
     } catch (error) {
-        res.status(400).json({
-            message: error.message
-        });
+        throw error;
     }
 };
-
 const getTasks = async (req, res) => {
     try {
         const tasks = await Task.find();
 
         res.status(200).json(tasks);
     } catch (error) {
-        res.status(500).json({
-            message: error.message
-        });
+        throw error;
     }
 };
 
@@ -36,11 +31,9 @@ const getTaskById = async (req, res) => {
         }
 
         res.status(200).json(task);
-    } catch (error) {
-        res.status(500).json({
-            message: error.message
-        });
-    }
+   } catch (error) {
+    throw error;
+}
 };
 const updateTask = async (req, res) => {
     try {
@@ -58,10 +51,8 @@ const updateTask = async (req, res) => {
 
         res.status(200).json(task);
     } catch (error) {
-        res.status(400).json({
-            message: error.message
-        });
-    }
+    throw error;
+}
 };
 const deleteTask = async (req, res) => {
     try {
@@ -76,11 +67,9 @@ const deleteTask = async (req, res) => {
         res.status(200).json({
             message: "Task deleted successfully"
         });
-    } catch (error) {
-        res.status(400).json({
-            message: error.message
-        });
-    }
+   } catch (error) {
+    throw error;
+}
 };
 module.exports = {
     createTask,

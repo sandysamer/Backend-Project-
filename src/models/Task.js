@@ -2,17 +2,20 @@ const mongoose = require("mongoose");
 
 const taskSchema = new mongoose.Schema(
   {
-    title: {
-      type: String,
-      required: true,
-      trim: true,
-    },
+   title: {
+    type: String,
+    required: true,
+    trim: true,
+    minlength: 3,
+    maxlength: 100,
+},
 
     description: {
-      type: String,
-      default: "",
-      trim: true,
-    },
+    type: String,
+    default: "",
+    trim: true,
+    maxlength: 500,
+},
 
     status: {
       type: String,
