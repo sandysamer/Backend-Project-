@@ -1,5 +1,5 @@
 require("dotenv").config();
-
+const path = require("path");
 const taskRoutes = require("./src/routes/taskRoutes");
 const authRoutes = require("./src/routes/authRoutes");
 const errorMiddleware = require("./src/middleware/errorMiddleware");
@@ -12,6 +12,7 @@ const app = express();
 connectDatabase();
 
 app.use(express.json());
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use("/tasks", taskRoutes);
 app.use("/auth", authRoutes);
 

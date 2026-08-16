@@ -24,7 +24,9 @@ const userSchema = new mongoose.Schema(
       required: true,
       minlength: 6,
     },
-
+imageUrl: {
+    type: String,
+},
     role: {
       type: String,
       enum: ["user", "admin"],

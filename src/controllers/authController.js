@@ -1,6 +1,7 @@
 const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const deleteUploadedFile = require("../utils/delete-uploaded-file");
 
 const register = async (req, res) => {
   try {
@@ -21,6 +22,7 @@ const register = async (req, res) => {
       email,
       password: hashedPassword,
       role: role || "user",
+      imageUrl: req.file?.filename,
     });
 
     res.status(201).json({
@@ -30,13 +32,18 @@ const register = async (req, res) => {
         name: user.name,
         email: user.email,
         role: user.role,
+        imageUrl: user.imageUrl,
       },
     });
   } catch (error) {
+    if (req.file) {
+        deleteUploadedFile("users", req.file.filename);
+    }
+
     res.status(400).json({
-      message: error.message,
+        message: error.message,
     });
-  }
+}
 };
 
 const login = async (req, res) => {
